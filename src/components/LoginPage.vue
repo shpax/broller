@@ -272,17 +272,17 @@ export default {
 
 // Mobile version
 @media (max-width: 575px) {
-  .row {
-    display: block;
-  }
-
   .col-12-mobile {
     display: block;
     padding-right: 5px;
     padding-left: 5px;
   }
   .card-img-top {
-    height: 200px;
+    height: 100px;
+  }
+  h4 {
+    font-size: 18px;
+    font-weight: 200;
   }
 }
 </style>
