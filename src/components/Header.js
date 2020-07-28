@@ -3,7 +3,7 @@ import React from "react";
 export default function Header() {
   return (
     <nav className="navbar navbar-light shadow-sm bg-white">
-      <a className="navbar-brand" href="#">
+      <a className="navbar-brand" href="/">
         <img
           src="/logo.jpg"
           width="30"
