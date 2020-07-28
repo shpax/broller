@@ -1,0 +1,12 @@
+.achievement .achievement__img {
+  height: 100px;
+  width: 100px;
+
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.achievement .achievement__img--closed {
+  background-image: url("/ach_closed.png");
+}
