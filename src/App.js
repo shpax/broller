@@ -1,8 +1,14 @@
 import React, { useState } from "react";
+import Login from "./pages/Login";
 import "./App.css";
 import Header from "./components/Header";
 import Awards from "./pages/Awards";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 
 import { getData } from "./models/firebase";
 
@@ -24,8 +30,16 @@ function App() {
       {store ? (
         <Router>
           <Switch>
-            <Route path="/awards">
+            <Route exact path="/awards">
               <Awards />
+            </Route>
+
+            <Route exact path="/login">
+              <Login />
+            </Route>
+
+            <Route path="/">
+              <Redirect to={{ pathname: "/login" }} />
             </Route>
           </Switch>
         </Router>

@@ -16,6 +16,8 @@ firebase.initializeApp({
   measurementId: "G-954QEC6B4D",
 });
 
+firebase.auth().useDeviceLanguage();
+
 const db = firebase.firestore();
 
 async function getRoller(rollerId) {
@@ -77,4 +79,28 @@ export async function getData(rollerId) {
   // }
 
   return { roller, awards, levels, videos };
+}
+
+
+export async function authWithPhone(phoneNumber, loginButtonId) {
+
+  const recaptchaVerifier = new firebase.auth.RecaptchaVerifier(loginButtonId, {
+    'size': 'invisible',
+    'callback': function(response) {
+      // reCAPTCHA solved, allow signInWithPhoneNumber.
+      // onSignInSubmit();
+    }
+  });
+
+  const confirmationResult = await firebase.auth().signInWithPhoneNumber(phoneNumber, recaptchaVerifier);
+
+
+  return {
+    confirmationResult,
+    enterCode: (code) => {
+      const credential = firebase.auth.PhoneAuthProvider.credential(confirmationResult.verificationId, code);
+  
+      console.log(firebase.auth().signInWithCredential(credential));
+    }
+  }
 }
