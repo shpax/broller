@@ -1,0 +1,14 @@
+.navbar .navbar__return-btn {
+  height: 40px;
+  width: 40px;
+}
+
+.navbar .navbar__return-btn .material-icons {
+  font-size: 30px;
+  line-height: 40px;
+}
+
+.navbar .navbar__header {
+  display: flex;
+  align-items: center;
+}

@@ -1,8 +1,8 @@
 /** FIREBASE DATA MODEL
  * */
 
-import firebase from "firebase";
-import "firebase/analytics";
+import firebase from "firebase/app";
+import "firebase/auth";
 import "firebase/firestore";
 
 firebase.initializeApp({
@@ -81,26 +81,22 @@ export async function getData(rollerId) {
   return { roller, awards, levels, videos };
 }
 
-
 export async function authWithPhone(phoneNumber, loginButtonId) {
+  const recaptchaVerifier = new firebase.auth.RecaptchaVerifier(loginButtonId);
 
-  const recaptchaVerifier = new firebase.auth.RecaptchaVerifier(loginButtonId, {
-    'size': 'invisible',
-    'callback': function(response) {
-      // reCAPTCHA solved, allow signInWithPhoneNumber.
-      // onSignInSubmit();
-    }
-  });
-
-  const confirmationResult = await firebase.auth().signInWithPhoneNumber(phoneNumber, recaptchaVerifier);
-
+  const confirmationResult = await firebase
+    .auth()
+    .signInWithPhoneNumber(phoneNumber, recaptchaVerifier);
 
   return {
     confirmationResult,
     enterCode: (code) => {
-      const credential = firebase.auth.PhoneAuthProvider.credential(confirmationResult.verificationId, code);
-  
+      const credential = firebase.auth.PhoneAuthProvider.credential(
+        confirmationResult.verificationId,
+        code
+      );
+
       console.log(firebase.auth().signInWithCredential(credential));
-    }
-  }
+    },
+  };
 }

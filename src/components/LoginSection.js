@@ -38,6 +38,7 @@ export default function LoginSection() {
           />
         </div>
       ) : null}
+      <div id="capcha-container"></div>
       <div className="text-center">
         {authObj ? (
           <button
@@ -53,7 +54,7 @@ export default function LoginSection() {
             id="login-button"
             className="btn btn-primary"
             onClick={() =>
-              setAuthCodePromise(authWithPhone(number, "login-button"))
+              setAuthCodePromise(authWithPhone(number, "capcha-container"))
             }
           >
             получить код

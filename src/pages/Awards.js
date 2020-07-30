@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import RollerLevel from "../components/RollerLevel";
 import AchievementList from "../components/AchievementList";
@@ -11,22 +11,24 @@ const options = {
   dots: true,
 };
 
-function Awards() {
+function Awards({ levels, currentLevel, nextLevel }) {
+  useEffect(() => {
+    console.log("awards");
+  });
+
+  const achievements = levels.map((lvl, i) => (
+    <AchievementList list={lvl.awards} key={i} />
+  ));
   return (
     <div className="container mt-3">
       <div className="row">
         <div className="col-12 col-lg-6">
-          <RollerLevel />
+          <RollerLevel current={currentLevel} next={nextLevel} />
         </div>
 
         <div className="col-12 col-lg-6">
           <div className="navContainer"></div>
-          <OwlCarousel options={options}>
-            <AchievementList />
-            <AchievementList />
-            <AchievementList />
-            <AchievementList />
-          </OwlCarousel>
+          <OwlCarousel options={options}>{achievements}</OwlCarousel>
         </div>
       </div>
     </div>
