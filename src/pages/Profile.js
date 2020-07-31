@@ -15,6 +15,7 @@ function Profile({ data }) {
           <div className="m-2 mb-3 ">
             <img
               src={data.photo}
+              alt="фото профиля"
               className="profile__img rounded-circle shadow"
             />
           </div>
