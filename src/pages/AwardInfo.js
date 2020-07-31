@@ -19,7 +19,7 @@ function AwardInfo({ getAward }) {
                 src={isOpened ? photo : "/ach_closed.png"}
               />
             </div>
-            <h1 className="text-center">{name}</h1>
+            <h1 className="text-center mt-3">{name}</h1>
             <p className="award__desc">{desc}</p>
           </div>
         </div>
