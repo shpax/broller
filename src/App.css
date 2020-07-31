@@ -7,3 +7,7 @@ body,
 a {
   color: inherit;
 }
+
+.btn.btn-primary {
+  background-color: #4267b2;
+}

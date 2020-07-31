@@ -5,7 +5,7 @@ export default function RollerLevel({ current, next }) {
   const unopenedtext =
     unopened <= 1 ? "ачивка" : unopened < 5 ? `ачивки` : `ачивок`;
   return (
-    <div className="roller-level bg-white m-1 mb-3 p-2 pt-4 pb-4 text-center shadow-sm rounded">
+    <div className="roller-level bg-white m-1 mb-3 p-2 pt-4 pb-3 text-center shadow-sm rounded">
       <div className="level">
         <h2>{current.name},</h2>
         {next ? (
@@ -23,7 +23,9 @@ export default function RollerLevel({ current, next }) {
         )}
       </div>
       <div className="pt-2">
-        <a href="/">открыть плейлист</a>
+        <a className="btn btn-link text-primary" href="/">
+          открыть плейлист
+        </a>
       </div>
     </div>
   );

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Login from "./pages/Login";
 import Store from "./store";
 import AwardInfo from "./pages/AwardInfo";
+import Profile from "./pages/Profile";
 import "./App.css";
 import Header from "./components/Header";
 import Awards from "./pages/Awards";
@@ -27,37 +28,32 @@ function App() {
   return (
     <>
       <Router>
+        <Header returnTo="/awards" roller={store ? store.getRoller() : null} />
+
+        <Route exact path="/login">
+          <Login />
+        </Route>
+
+        <Route>
+          <Redirect to={{ pathname: store ? "/awards" : "/login" }} />
+        </Route>
         {store ? (
-          <>
-            <Switch>
-              <Route exact path="/awards/*">
-                <Header returnTo="/awards" roller={store.getRoller()} />
-              </Route>
-              <Route path="*">
-                <Header roller={store.getRoller()} />
-              </Route>
-            </Switch>
-            <Switch>
-              <Route exact path="/awards">
-                <Awards
-                  levels={store.getMappedAwardsByLevel()}
-                  currentLevel={store.getCurrentLevel()}
-                  nextLevel={store.getNextLevel()}
-                />
-              </Route>
+          <Switch>
+            <Route exact path="/awards">
+              <Awards
+                levels={store.getMappedAwardsByLevel()}
+                currentLevel={store.getCurrentLevel()}
+                nextLevel={store.getNextLevel()}
+              />
+            </Route>
+            <Route exact path="/me">
+              <Profile data={store.getRoller()} />
+            </Route>
 
-              <Route exact path="/awards/:id">
-                <AwardInfo getAward={(id) => store.getMappedAwardById(id)} />
-              </Route>
-              <Route exact path="/login">
-                <Login />
-              </Route>
-
-              <Route path="/">
-                <Redirect to={{ pathname: "/login" }} />
-              </Route>
-            </Switch>
-          </>
+            <Route exact path="/awards/:id">
+              <AwardInfo getAward={(id) => store.getMappedAwardById(id)} />
+            </Route>
+          </Switch>
         ) : null}
       </Router>
     </>
