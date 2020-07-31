@@ -34,7 +34,7 @@ export default function Header({ returnTo, roller }) {
         {/* </a> */}
       </div>
       <Switch>
-        <Route exact path="/me">
+        <Route exact path={["/me", "/login"]}>
           {null}
         </Route>
         <Route>

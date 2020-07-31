@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "./Profile.css";
 function Profile({ data }) {
   console.log(data);
@@ -32,9 +33,9 @@ function Profile({ data }) {
               <button type="button" class="btn btn-primary btn-sm mr-3">
                 Редактировать
               </button>
-              <button type="button" class="btn btn-primary btn-sm">
+              <Link type="button" class="btn btn-primary btn-sm" to="/login">
                 Выйти
-              </button>
+              </Link>
             </div>
             <div>
               <button type="button" class="btn btn-link text-danger btn-sm">
