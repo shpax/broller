@@ -11,3 +11,8 @@ a {
 .btn.btn-primary {
   background-color: #4267b2;
 }
+
+.text-size-secondary {
+  font-size: 14px;
+  font-weight: 500;
+}

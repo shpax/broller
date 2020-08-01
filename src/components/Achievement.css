@@ -8,7 +8,3 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
-
-.achievement .achievement__img--closed {
-  background-image: url("/ach_closed.png");
-}

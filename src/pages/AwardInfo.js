@@ -10,27 +10,29 @@ function AwardInfo({ getAward }) {
   return (
     <div className="container mt-3 award">
       <div className="row">
-        <div className="col-12 col-lg-6">
-          <div className="bg-white m-1 p-3 shadow-sm rounded">
+        <div className="col-12 col-lg-6 ">
+          <div className="shadow-sm bg-white">
             <div>
               <img
-                className="award__img rounded"
+                className="award__img rounded-top"
                 alt="картинка ачивки"
-                src={isOpened ? photo : "/ach_closed.png"}
+                src={isOpened ? photo : "/logo.jpg"}
               />
             </div>
-            <h1 className="text-center mt-3">{name}</h1>
-            <p className="award__desc">{desc}</p>
+            <div className=" m-1 p-3 pt-0 ">
+              <h1 className="text-center mb-3">{name}</h1>
+              <p className="award__desc mb-0">{desc}</p>
+            </div>
           </div>
         </div>
         <div className="col-12 col-lg-6">
-          <div className="m-1 mt-3 ">
+          <div className="mt-3 ">
             {video ? (
               <iframe
                 // width="560"
                 // height="315"
                 title="виео пруф"
-                className="award__video"
+                className="award__video shadow-sm"
                 // src="https://www.youtube.com/embed/bb5iBYgJV4o"
                 src={video.replace(/watch\?v=/, "embed/")}
                 frameborder="0"

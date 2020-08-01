@@ -20,22 +20,20 @@ firebase.auth().useDeviceLanguage();
 
 const db = firebase.firestore();
 
-async function getRoller(rollerId) {
-  const rollerRecord = await db.collection("rollers").doc(rollerId).get();
+async function getRoller(phone) {
+  const records = await db
+    .collection("rollers")
+    .where("phone", "==", phone)
+    .get();
 
-  if (!rollerRecord.exists) return null;
+  console.log(records);
+  const doc = records.docs[0];
+  const rollerRecord = {
+    ...doc.data(),
+    id: doc.id,
+  };
 
-  const roller = rollerRecord.data();
-
-  // superfluous mapping
-
-  // const videoRecords = await db
-  //   .collection("opened_awards")
-  //   .where("rollerId", "==", rollerId)
-  //   .get();
-
-  // roller.videos = videoRecords.docs.map((rec) => rec.data());
-  return roller;
+  return rollerRecord;
 }
 
 async function getAwardVideos(rollerId) {
@@ -57,46 +55,40 @@ async function getLevels() {
   return records.docs.map((rec) => ({ ...rec.data(), id: rec.id }));
 }
 
-export async function getData(rollerId) {
-  const roller = await getRoller(rollerId);
-  const videos = await getAwardVideos(rollerId);
+export async function getData(phone) {
+  const roller = await getRoller(phone);
+  const videos = await getAwardVideos(roller.id);
   const awards = await getAwards();
   const levels = await getLevels();
-
-  // superfluous mapping
-
-  // awards.forEach((award) => {
-  //   award.level = levels.find((l) => l.id == award.levelId);
-  //   delete award.levelId;
-  // });
-
-  // if (roller.awardIds && roller.awardIds.length) {
-  //   roller.awards = awards.filter((award) =>
-  //     roller.awardIds.includes(award.id)
-  //   );
-
-  //   delete roller.awardIds;
-  // }
 
   return { roller, awards, levels, videos };
 }
 
-export async function authWithPhone(phoneNumber, loginButtonId) {
-  const recaptchaVerifier = new firebase.auth.RecaptchaVerifier(loginButtonId);
+export async function authWithPhone(phoneNumber, capchaContainerId) {
+  const recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
+    capchaContainerId
+  );
 
   const confirmationResult = await firebase
     .auth()
     .signInWithPhoneNumber(phoneNumber, recaptchaVerifier);
 
-  return {
-    confirmationResult,
-    enterCode: (code) => {
-      const credential = firebase.auth.PhoneAuthProvider.credential(
-        confirmationResult.verificationId,
-        code
-      );
+  return (code) => {
+    const credential = firebase.auth.PhoneAuthProvider.credential(
+      confirmationResult.verificationId,
+      code
+    );
 
-      console.log(firebase.auth().signInWithCredential(credential));
-    },
+    return firebase.auth().signInWithCredential(credential);
   };
+}
+
+export async function authWithFacebook() {
+  const provider = new firebase.auth.FacebookAuthProvider();
+  const result = await firebase.auth().signInWithPopup(provider);
+
+  const token = result.credential.accessToken;
+  const user = result.user;
+
+  console.log(token, user);
 }

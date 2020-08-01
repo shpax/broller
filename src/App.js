@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import Login from "./pages/Login";
 import Store from "./store";
 import AwardInfo from "./pages/AwardInfo";
@@ -20,9 +20,16 @@ function App() {
 
   useEffect(() => {
     console.log("getting effect data");
-    getData("recKeRRQvLmLlbKpd").then((d) => {
+    getData("+380934555103").then((d) => {
       setStore(new Store(d));
     });
+  }, []);
+
+  const onLogin = useCallback(async (data) => {
+    const userData = await getData(data.user.phoneNumber);
+
+    console.log(userData);
+    setStore(new Store(userData));
   }, []);
 
   return (
@@ -31,7 +38,7 @@ function App() {
         <Header returnTo="/awards" roller={store ? store.getRoller() : null} />
 
         <Route exact path="/login">
-          <Login />
+          <Login onLogin={onLogin} />
         </Route>
 
         <Route>

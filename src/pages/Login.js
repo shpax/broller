@@ -1,7 +1,7 @@
 import React from "react";
 import LoginSection from "../components/LoginSection";
 
-function Login() {
+function Login({ onLogin }) {
   return (
     <div className="container mt-3">
       <div className="row">
@@ -18,7 +18,7 @@ function Login() {
         </div>
 
         <div className="col-12 col-lg-6">
-          <LoginSection />
+          <LoginSection onLogin={onLogin} />
         </div>
       </div>
     </div>

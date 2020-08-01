@@ -7,13 +7,13 @@ export default function RollerLevel({ current, next }) {
   return (
     <div className="roller-level bg-white m-1 mb-3 p-2 pt-4 pb-3 text-center shadow-sm rounded">
       <div className="level">
-        <h2>{current.name},</h2>
+        <h1 className="mb-4 mt-2">{current.name}</h1>
         {next ? (
           <>
-            <h6>
+            <p className="text-secondary mb-1 text-size-secondary">
               {unopened} {unopenedtext}, чтобы называть себя
-            </h6>
-            <h2>{next.name}</h2>
+            </p>
+            <h4 className="text-secondary">{next.name}</h4>
           </>
         ) : (
           <>
