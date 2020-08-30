@@ -1,26 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
 
 import RollerLevel from "../components/RollerLevel";
 import AchievementList from "../components/AchievementList";
-import OwlCarousel from "react-owl-carousel2";
+import WelcomeSection from "../components/WelcomeSection";
+
+import Carousel from "@brainhubeu/react-carousel";
 
 import "./Awards.css";
-import "react-owl-carousel2/lib/styles.css"; //Allows for server-side rendering.
-import "react-owl-carousel2/src/owl.theme.default.css"; //Allows for server-side rendering.
-
-const options = {
-  items: 1,
-  dots: true,
-};
 
 function Awards({ levels, currentLevel, nextLevel }) {
-  useEffect(() => {
-    console.log("awards");
-  });
-
   const achievements = levels.map((lvl, i) => (
-    <AchievementList list={lvl.awards} header={lvl.name} key={i} />
+    <AchievementList
+      list={lvl.awards}
+      level={lvl}
+      header={`${lvl.name}`}
+      key={i}
+    />
   ));
+
+  let startPosition =
+    1 + levels.indexOf(levels.find((lvl) => lvl.id === currentLevel.id));
+
+  if (startPosition > levels.length) {
+    startPosition = levels.length;
+  }
+
+  const [position, setPosition] = useState(startPosition);
+
   return (
     <div className="container mt-3 awards">
       <div className="row">
@@ -29,12 +35,14 @@ function Awards({ levels, currentLevel, nextLevel }) {
         </div>
 
         <div className="col-12 col-lg-6">
-          <OwlCarousel
-            className="awards__levels owl-carousel owl-theme"
-            options={options}
+          <Carousel
+            plugins={["fastSwipe"]}
+            animationSpeed={100}
+            value={position}
+            onChange={setPosition}
           >
-            {achievements}
-          </OwlCarousel>
+            {[<WelcomeSection key={-1} />, ...achievements]}
+          </Carousel>
         </div>
       </div>
     </div>

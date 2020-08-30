@@ -1,8 +1,9 @@
 .award .award__img {
   /* height: 300px; */
   display: block;
-  width: 100%;
+  /* width: 100%; */
   margin: 0 auto;
+  height: 200px;
 }
 
 .award .award__desc {
@@ -16,5 +17,5 @@
 
 .award .award__video {
   width: 100%;
-  min-height: 220px;
+  min-height: 520px;
 }

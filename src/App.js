@@ -3,7 +3,8 @@ import Login from "./pages/Login";
 import Store from "./store";
 import AwardInfo from "./pages/AwardInfo";
 import Profile from "./pages/Profile";
-import "./App.css";
+import * as cache from "./models/LocalStorageCache";
+
 import Header from "./components/Header";
 import Awards from "./pages/Awards";
 import {
@@ -13,22 +14,33 @@ import {
   Redirect,
 } from "react-router-dom";
 
+import "./App.css";
+import "@brainhubeu/react-carousel/lib/style.css";
+
 import { getData } from "./models/firebase";
 
+const cachedState = cache.getValue("store");
+const cachedStore = cachedState ? new Store(cachedState) : null;
+
 function App() {
-  const [store, setStore] = useState(null);
+  const [store, setStore] = useState(cachedStore);
 
   useEffect(() => {
-    console.log("getting effect data");
-    getData("+380934555103").then((d) => {
-      setStore(new Store(d));
-    });
+    if (store) {
+      const phone = store.getRoller().phone;
+      getData(phone).then((d) => {
+        console.log("getting effect data", d);
+        cache.setValue("store", d);
+
+        setStore(new Store(d));
+      });
+    }
   }, []);
 
   const onLogin = useCallback(async (data) => {
     const userData = await getData(data.user.phoneNumber);
-
-    console.log(userData);
+    cache.setValue("store", userData);
+    console.log("login user:", userData);
     setStore(new Store(userData));
   }, []);
 
@@ -37,31 +49,35 @@ function App() {
       <Router>
         <Header returnTo="/awards" roller={store ? store.getRoller() : null} />
 
-        <Route exact path="/login">
-          <Login onLogin={onLogin} />
-        </Route>
+        <Switch>
+          <Route exact path="/login">
+            <Login onLogin={onLogin} />
+          </Route>
+          {store ? (
+            <>
+              <Route exact path="/awards">
+                <Awards
+                  levels={store.getMappedAwardsByLevel()}
+                  currentLevel={store.getCurrentLevel()}
+                  nextLevel={store.getNextLevel()}
+                />
+              </Route>
+              <Route exact path="/me">
+                <Profile data={store.getRoller()} />
+              </Route>
 
-        <Route>
-          <Redirect to={{ pathname: store ? "/awards" : "/login" }} />
-        </Route>
-        {store ? (
-          <Switch>
-            <Route exact path="/awards">
-              <Awards
-                levels={store.getMappedAwardsByLevel()}
-                currentLevel={store.getCurrentLevel()}
-                nextLevel={store.getNextLevel()}
-              />
-            </Route>
-            <Route exact path="/me">
-              <Profile data={store.getRoller()} />
-            </Route>
-
-            <Route exact path="/awards/:id">
-              <AwardInfo getAward={(id) => store.getMappedAwardById(id)} />
-            </Route>
-          </Switch>
-        ) : null}
+              <Route exact path="/awards/:id">
+                <AwardInfo
+                  getAward={(id) => store.getMappedAwardById(id)}
+                  getLevel={(id) => store.getLevelById(id)}
+                />
+              </Route>
+            </>
+          ) : null}
+          <Route exact path="/">
+            <Redirect to={{ pathname: store ? "/awards" : "/login" }} />
+          </Route>
+        </Switch>
       </Router>
     </>
   );

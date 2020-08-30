@@ -18,7 +18,23 @@ firebase.initializeApp({
 
 firebase.auth().useDeviceLanguage();
 
+firebase.auth().settings.appVerificationDisabledForTesting = true;
+
 const db = firebase.firestore();
+
+async function createNewRoller(phone) {
+  const ref = await db.collection("rollers").add({
+    phone,
+    awardIds: [],
+    birthdate: null,
+    levelId: null,
+    name: null,
+    photo: null,
+    playlist: null,
+  });
+
+  return await ref.get();
+}
 
 async function getRoller(phone) {
   const records = await db
@@ -27,7 +43,12 @@ async function getRoller(phone) {
     .get();
 
   console.log(records);
-  const doc = records.docs[0];
+  let doc = records.docs[0];
+  if (!doc) {
+    doc = await createNewRoller(phone);
+
+    console.log("created user:".doc);
+  }
   const rollerRecord = {
     ...doc.data(),
     id: doc.id,
@@ -64,14 +85,19 @@ export async function getData(phone) {
   return { roller, awards, levels, videos };
 }
 
-export async function authWithPhone(phoneNumber, capchaContainerId) {
-  const recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-    capchaContainerId
-  );
+export function createRecaptchaVerifier(container) {
+  return new firebase.auth.RecaptchaVerifier(container, {
+    size: "invisible",
+    callback: (response) => {
+      console.log("response", response);
+    },
+  });
+}
 
+export async function authWithPhone(phoneNumber) {
   const confirmationResult = await firebase
     .auth()
-    .signInWithPhoneNumber(phoneNumber, recaptchaVerifier);
+    .signInWithPhoneNumber(phoneNumber, window.recaptchaVerifier);
 
   return (code) => {
     const credential = firebase.auth.PhoneAuthProvider.credential(
@@ -81,14 +107,4 @@ export async function authWithPhone(phoneNumber, capchaContainerId) {
 
     return firebase.auth().signInWithCredential(credential);
   };
-}
-
-export async function authWithFacebook() {
-  const provider = new firebase.auth.FacebookAuthProvider();
-  const result = await firebase.auth().signInWithPopup(provider);
-
-  const token = result.credential.accessToken;
-  const user = result.user;
-
-  console.log(token, user);
 }

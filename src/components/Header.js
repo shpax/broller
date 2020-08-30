@@ -38,6 +38,9 @@ export default function Header({ returnTo, roller }) {
         <Route>
           {photo ? (
             <div>
+              <Link className="btn btn-link text-primary" to="/me">
+                профиль
+              </Link>
               <Link to="/me">
                 <img
                   src={photo}

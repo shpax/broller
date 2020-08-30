@@ -21,10 +21,17 @@ function Profile({ data }) {
                 className="profile__img rounded-top"
               />
             </div>
-            <div className=" m-1 p-3 rounded text-center">
+            <div className=" m-1 pt-3 rounded text-center">
               <h3 className="mb-3">{data.name}</h3>
               <div className="mb-2">{data.phone}</div>
-              <div className="">{birthStr}</div>
+              <div className="mb-2">{birthStr}</div>
+              {data.playlist ? (
+                <div className="mb-2">
+                  <a href={data.playlist} className="btn btn-link text-primary">
+                    мой плейлист
+                  </a>
+                </div>
+              ) : null}
             </div>
           </div>
 

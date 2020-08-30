@@ -1,7 +1,7 @@
 html,
 body,
 #root {
-  height: 100%;
+  min-height: 100%;
 }
 
 a {
@@ -15,4 +15,17 @@ a {
 .text-size-secondary {
   font-size: 14px;
   font-weight: 500;
+}
+
+.BrainhubCarousel__track {
+  align-items: flex-start;
+}
+
+.BrainhubCarousel__dots .BrainhubCarousel__dot:before {
+  width: 10px !important;
+  height: 10px !important;
+}
+
+button.BrainhubCarousel__dot {
+  background: none;
 }

@@ -14,11 +14,12 @@ export default class Store {
     return this.awards.map((award) => ({
       ...award,
       isOpened: this.roller.awardIds.includes(award.id),
-      video: get(
+      rollerVideo: get(
         this.videos.find((v) => v.awardId === award.id),
         "video",
         null
       ),
+      videos: award.video ? award.video.split(",") : [],
     }));
   }
 
@@ -51,6 +52,10 @@ export default class Store {
         (lvl, i) => get(this.levels[i - 1], "id") === currentLvl.id
       ) || null
     );
+  }
+
+  getLevelById(id) {
+    return this.levels.find((lvl) => lvl.id === id);
   }
 
   getRoller() {
