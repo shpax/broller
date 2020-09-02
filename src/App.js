@@ -54,7 +54,7 @@ function App() {
             <Redirect to={{ pathname: store ? "/awards" : "/login" }} />
           </Route>
           <Route exact path="/login">
-            <Login onLogin={onLogin} />
+            {store ? <Redirect to="/awards" /> : <Login onLogin={onLogin} />}
           </Route>
           {store ? (
             <>
