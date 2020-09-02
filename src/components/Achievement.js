@@ -6,10 +6,11 @@ export default function Achievement({ data, image }) {
   return (
     <div className="achievement mb-3">
       <Link to={`/awards/${data.id}`}>
-        <div
+        <img
           className="achievement__img rounded-circle shadow-sm"
-          style={{ backgroundImage: `url('${image}')` }}
-        ></div>
+          src={image}
+          alt="картинка ачивки"
+        />
         <div className="text-size-secondary mt-2 text-center">{data.name}</div>
       </Link>
     </div>

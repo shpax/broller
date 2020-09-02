@@ -1,4 +1,6 @@
 .achievement .achievement__img {
+  object-fit: cover;
+  display: block;
   height: 60px;
   width: 60px;
 
