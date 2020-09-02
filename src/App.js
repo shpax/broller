@@ -26,8 +26,8 @@ function App() {
   const [store, setStore] = useState(cachedStore);
 
   useEffect(() => {
-    if (store) {
-      const phone = store.getRoller().phone;
+    if (cachedStore) {
+      const phone = cachedStore.getRoller().phone;
       getData(phone).then((d) => {
         console.log("getting effect data", d);
         cache.setValue("store", d);
@@ -50,6 +50,9 @@ function App() {
         <Header returnTo="/awards" roller={store ? store.getRoller() : null} />
 
         <Switch>
+          <Route exact path="/">
+            <Redirect to={{ pathname: store ? "/awards" : "/login" }} />
+          </Route>
           <Route exact path="/login">
             <Login onLogin={onLogin} />
           </Route>
@@ -74,9 +77,6 @@ function App() {
               </Route>
             </>
           ) : null}
-          <Route exact path="/">
-            <Redirect to={{ pathname: store ? "/awards" : "/login" }} />
-          </Route>
         </Switch>
       </Router>
     </>

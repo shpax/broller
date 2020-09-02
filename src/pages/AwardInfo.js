@@ -36,7 +36,7 @@ function AwardInfo({ getAward, getLevel }) {
   return (
     <div className="container mt-3 award">
       <div className="row">
-        <div className="col-12 col-lg-6 ">
+        <div className="col-12">
           <div className="shadow-sm bg-white">
             <div className="pt-3">
               <img
@@ -51,7 +51,7 @@ function AwardInfo({ getAward, getLevel }) {
             </div>
           </div>
         </div>
-        <div className="col-12 col-lg-6">
+        <div className="col-12">
           <div className="">
             <div className="text-center p-2">
               <Dots

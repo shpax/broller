@@ -58,7 +58,6 @@ function Login({ onLogin }) {
                   name="phone"
                   placeholder="Номер телефона"
                   aria-label="Номер телефона"
-                  value="+380931234567"
                   ref={phoneInput}
                 />
               </div>

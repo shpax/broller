@@ -4,7 +4,7 @@ import RollerLevel from "../components/RollerLevel";
 import AchievementList from "../components/AchievementList";
 import WelcomeSection from "../components/WelcomeSection";
 
-import Carousel from "@brainhubeu/react-carousel";
+import Carousel, { Dots } from "@brainhubeu/react-carousel";
 
 import "./Awards.css";
 
@@ -18,8 +18,13 @@ function Awards({ levels, currentLevel, nextLevel }) {
     />
   ));
 
-  let startPosition =
-    1 + levels.indexOf(levels.find((lvl) => lvl.id === currentLevel.id));
+  let startPosition = 0;
+
+  if (currentLevel) {
+    startPosition = levels.indexOf(
+      levels.find((lvl) => lvl.id === currentLevel.id)
+    );
+  }
 
   if (startPosition > levels.length) {
     startPosition = levels.length;
@@ -30,18 +35,27 @@ function Awards({ levels, currentLevel, nextLevel }) {
   return (
     <div className="container mt-3 awards">
       <div className="row">
-        <div className="col-12 col-lg-6">
-          <RollerLevel current={currentLevel} next={nextLevel} />
+        <div className="col-12">
+          {currentLevel ? (
+            <RollerLevel current={currentLevel} next={nextLevel} />
+          ) : (
+            <WelcomeSection key={-1} />
+          )}
         </div>
 
-        <div className="col-12 col-lg-6">
+        <div className="col-12">
+          <Dots
+            value={position}
+            onChange={setPosition}
+            number={achievements.length}
+          />
           <Carousel
             plugins={["fastSwipe"]}
             animationSpeed={100}
             value={position}
             onChange={setPosition}
           >
-            {[<WelcomeSection key={-1} />, ...achievements]}
+            {achievements}
           </Carousel>
         </div>
       </div>

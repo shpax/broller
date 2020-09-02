@@ -9,7 +9,11 @@ export default function RollerLevel({ current, next }) {
     <div className="roller-level bg-white m-1 mb-3 pt-0 pb-3 text-center shadow-sm rounded">
       <div className="level">
         <div>
-          <img src={current.picture} className="level__picture" />
+          <img
+            alt="картинка уровня"
+            src={current.picture}
+            className="level__picture"
+          />
         </div>
         <h1 className="mb-4 mt-2">{current.name}</h1>
         {next ? (

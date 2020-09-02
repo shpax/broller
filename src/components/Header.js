@@ -3,7 +3,7 @@ import { Link, Route, Switch } from "react-router-dom";
 import "./Header.css";
 
 export default function Header({ returnTo, roller }) {
-  const photo = (roller && roller.photo) || null;
+  const photo = (roller && roller.photo) || "/logo.jpg";
   return (
     <nav className="navbar navbar-light shadow-sm bg-white">
       <div className="navbar__header">

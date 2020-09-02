@@ -39,7 +39,7 @@ export default class Store {
   getCurrentLevel() {
     const levels = this.getMappedAwardsByLevel();
 
-    if (!this.roller.levelId) return levels[0];
+    if (!this.roller.levelId) return null;
     return levels.find((lvl) => lvl.id === this.roller.levelId);
   }
 
@@ -47,6 +47,9 @@ export default class Store {
     const currentLvl = this.getCurrentLevel();
 
     const levels = this.getMappedAwardsByLevel();
+
+    if (!currentLvl) return levels[0];
+
     return (
       levels.find(
         (lvl, i) => get(this.levels[i - 1], "id") === currentLvl.id
