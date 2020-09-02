@@ -18,7 +18,7 @@ firebase.initializeApp({
 
 firebase.auth().useDeviceLanguage();
 
-firebase.auth().settings.appVerificationDisabledForTesting = true;
+// firebase.auth().settings.appVerificationDisabledForTesting = true;
 
 const db = firebase.firestore();
 
