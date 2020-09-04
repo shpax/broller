@@ -50,8 +50,9 @@ function Awards({ levels, currentLevel, nextLevel }) {
             number={achievements.length}
           />
           <Carousel
-            animationSpeed={500}
+            animationSpeed={300}
             value={position}
+            plugins={["arrows"]}
             onChange={setPosition}
           >
             {achievements}
