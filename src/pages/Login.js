@@ -33,9 +33,9 @@ function Login({ onLogin }) {
   return (
     <div className="container mt-3">
       <div className="row">
-        <div className="col-12 col-lg-6">
+        <div className="col-12 mt-2 mb-4">
           <div className="bg-white m-1 p-3 shadow-sm">
-            <p className="text-center">Привет-привет!</p>
+            <p className="text-center h4">Привет-привет!</p>
             <p>
               Вы посетили проект «достижения» команды Broller Team. Здесь
               подробно прописаны и показаны все движения на роликах от уровня
@@ -45,7 +45,7 @@ function Login({ onLogin }) {
           </div>
         </div>
 
-        <div className="col-12 col-lg-6">
+        <div className="col-12">
           <div className="bg-white m-1 p-3 shadow-sm">
             <p className="text-center">
               Чтобы войти, введи свой номер телефона
