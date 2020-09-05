@@ -1,12 +1,16 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import AuthPhone from "../models/firebase/AuthPhone";
 import { createRecaptchaVerifier } from "../models/firebase";
 
 function Login({ onLogin }) {
   const [authPhone, setAuthPhone] = useState(null);
+  const [wrongCode, setWrongCode] = useState(false);
+  const [tooManyAuth, setTooManyAuth] = useState(false);
   const phoneInput = useRef(null);
   const codeInput = useRef(null);
   const captchaContainer = useRef(null);
+
+  console.log("rerender");
 
   useEffect(() => {
     console.log("captcha start");
@@ -18,13 +22,28 @@ function Login({ onLogin }) {
       window.recaptchaWidgetId = widgetId;
     });
   }, []);
-  useEffect(() => {});
+
+  const enterCode = useCallback(async () => {
+    setWrongCode(false);
+    try {
+      await authPhone.enterCode(codeInput.current.value);
+    } catch (e) {
+      setWrongCode(true);
+    }
+  }, [authPhone]);
+
   const onPhoneEnter = async (phone) => {
+    setTooManyAuth(false);
+
     const authPhone = new AuthPhone(phone);
 
     authPhone.once("code-sent", () => setAuthPhone(authPhone));
 
-    await authPhone.getCode();
+    try {
+      await authPhone.getCode();
+    } catch (e) {
+      return setTooManyAuth(true);
+    }
 
     if (onLogin) {
       authPhone.once("auth-success", onLogin);
@@ -73,13 +92,23 @@ function Login({ onLogin }) {
                   />
                 </div>
               ) : null}
+              {wrongCode ? (
+                <div className="text-danger text-size-secondary mb-3">
+                  с кодом что-то не так
+                </div>
+              ) : null}
+              {tooManyAuth ? (
+                <div className="text-danger text-size-secondary mb-3">
+                  много авторизаций, попробуй-ка позже
+                </div>
+              ) : null}
               <div ref={captchaContainer}></div>
               <div className="text-center">
                 {authPhone ? (
                   <button
                     type="button"
                     className="btn btn-primary"
-                    onClick={() => authPhone.enterCode(codeInput.current.value)}
+                    onClick={enterCode}
                   >
                     войти
                   </button>
