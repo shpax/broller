@@ -4,7 +4,8 @@ import RollerLevel from "../components/RollerLevel";
 import AchievementList from "../components/AchievementList";
 import WelcomeSection from "../components/WelcomeSection";
 
-import Carousel, { Dots } from "@brainhubeu/react-carousel";
+import Carousel from "@brainhubeu/react-carousel";
+import ArrowDots from "../components/ArrowDots";
 
 import "./Awards.css";
 
@@ -44,7 +45,7 @@ function Awards({ levels, currentLevel, nextLevel }) {
         </div>
 
         <div className="col-12">
-          <Dots
+          <ArrowDots
             value={position}
             onChange={setPosition}
             number={achievements.length}

@@ -1,0 +1,15 @@
+.arrow-dots {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-dots .arrow-dots__icon {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.arrow-dots .arrow-dots__icon.disabled {
+  color: #888;
+}

@@ -4,6 +4,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage";
 
 firebase.initializeApp({
   apiKey: "AIzaSyDh39tWOVnMY8fpSRDFcCXh7Tki3nwr-WM",
@@ -21,6 +22,7 @@ firebase.auth().useDeviceLanguage();
 // firebase.auth().settings.appVerificationDisabledForTesting = true;
 
 const db = firebase.firestore();
+const storage = firebase.storage();
 
 async function createNewRoller(phone) {
   const ref = await db.collection("rollers").add({
@@ -107,4 +109,17 @@ export async function authWithPhone(phoneNumber) {
 
     return firebase.auth().signInWithCredential(credential);
   };
+}
+
+export async function updateRoller(id, data) {
+  if (data.photo) {
+    const ref = storage.ref(
+      `profile/${id}${data.photo.name.match(/\.\w+/)[0]}`
+    );
+    await ref.put(data.photo);
+
+    data.photo = await ref.getDownloadURL();
+  }
+  console.log(data);
+  await db.collection("rollers").doc(id).update(data);
 }

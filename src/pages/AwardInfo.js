@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { useParams } from "react-router-dom";
-import Carousel, { Dots } from "@brainhubeu/react-carousel";
+import Carousel from "@brainhubeu/react-carousel";
+import ArrowDots from "../components/ArrowDots";
 import "./AwardInfo.css";
 
 function AwardInfo({ getAward, getLevel }) {
@@ -54,7 +55,7 @@ function AwardInfo({ getAward, getLevel }) {
         <div className="col-12">
           <div className="">
             <div className="text-center p-2">
-              <Dots
+              <ArrowDots
                 value={carouselPos}
                 onChange={setCarouselPos}
                 number={items.length}
