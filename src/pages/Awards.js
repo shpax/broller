@@ -53,7 +53,7 @@ function Awards({ levels, currentLevel, nextLevel }) {
           <Carousel
             animationSpeed={300}
             value={position}
-            plugins={["arrows"]}
+            plugins={["fastSwipe"]}
             onChange={setPosition}
           >
             {achievements}
