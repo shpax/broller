@@ -46,7 +46,7 @@ export default function Header({ returnTo, roller }) {
                   src={photo}
                   width="40"
                   height="40"
-                  className="d-inline-block rounded-circle align-middle shadow"
+                  className="navbar__profile-image d-inline-block rounded-circle align-middle shadow"
                   alt=""
                   loading="lazy"
                 />

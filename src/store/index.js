@@ -10,6 +10,10 @@ export default class Store {
     console.log(this);
   }
 
+  updateRoller(data) {
+    return new Store({ ...this, roller: { ...this.roller, ...data } });
+  }
+
   getMappedAwards() {
     return this.awards.map((award) => ({
       ...award,

@@ -120,6 +120,8 @@ export async function updateRoller(id, data) {
 
     data.photo = await ref.getDownloadURL();
   }
-  console.log(data);
+
   await db.collection("rollers").doc(id).update(data);
+
+  return data;
 }

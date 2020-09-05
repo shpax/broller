@@ -51,13 +51,16 @@ function App() {
   }, []);
 
   const onUpdateProfile = useCallback(
-    (data) => {
+    async (data) => {
       console.log(data);
       if (roller) {
-        updateRoller(roller.id, data);
+        const updatedData = await updateRoller(roller.id, data);
+        const newStore = store.updateRoller(updatedData);
+
+        setStore(newStore);
       }
     },
-    [roller]
+    [roller, store]
   );
 
   return (

@@ -1,11 +1,30 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import useInput from "../hooks/useInput";
 import "./Profile.css";
 import Compressor from "compressorjs";
 
 function Profile({ data, onLogout, onUpdate }) {
   const [editMode, setEditMode] = useState(false);
-  const fileRef = useRef(null);
+  const fileInputRef = useRef(null);
+  const imgRef = useRef(null);
+
+  useEffect(() => {
+    if (fileInputRef.current) {
+      fileInputRef.current.addEventListener("change", (e) => {
+        console.log("asdasd");
+        const { files } = e.target;
+        if (files && files[0]) {
+          var reader = new FileReader();
+
+          reader.onload = function (e) {
+            imgRef.current.src = e.target.result;
+          };
+
+          reader.readAsDataURL(files[0]); // convert to base64 string
+        }
+      });
+    }
+  }, [editMode]);
 
   const { value: nameValue, bind: nameBind, reset: resetName } = useInput(
     data.name
@@ -25,6 +44,8 @@ function Profile({ data, onLogout, onUpdate }) {
     resetName();
     resetPhone();
     resetBirthdate();
+
+    imgRef.current.src = data.photo;
   };
 
   const onSaveCb = () => {
@@ -36,11 +57,11 @@ function Profile({ data, onLogout, onUpdate }) {
       };
 
       if (
-        fileRef.current &&
-        fileRef.current.files &&
-        fileRef.current.files[0]
+        fileInputRef.current &&
+        fileInputRef.current.files &&
+        fileInputRef.current.files[0]
       ) {
-        const file = fileRef.current.files[0];
+        const file = fileInputRef.current.files[0];
 
         if (!file) {
           return;
@@ -65,7 +86,7 @@ function Profile({ data, onLogout, onUpdate }) {
       }
     }
     setEditMode(false);
-    resetInputs();
+    // resetInputs();
   };
 
   const onCancelCb = () => {
@@ -79,6 +100,7 @@ function Profile({ data, onLogout, onUpdate }) {
           <div className="shadow-sm bg-white pb-2">
             <div className="mb-3 ">
               <img
+                ref={imgRef}
                 src={data.photo || "/logo.jpg"}
                 alt="фото профиля"
                 className="profile__img rounded-top"
@@ -94,7 +116,7 @@ function Profile({ data, onLogout, onUpdate }) {
                     <div className="custom-file">
                       <input
                         type="file"
-                        ref={fileRef}
+                        ref={fileInputRef}
                         className="custom-file-input"
                         id="inputGroupFile02"
                       />

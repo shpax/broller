@@ -12,3 +12,7 @@
   display: flex;
   align-items: center;
 }
+
+.navbar__profile-image {
+  object-fit: cover;
+}
