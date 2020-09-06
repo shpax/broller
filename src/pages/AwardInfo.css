@@ -19,3 +19,9 @@
   width: 100%;
   min-height: 520px;
 }
+
+@media (min-width: 550px) {
+  .award .award__img {
+    height: auto;
+  }
+}

@@ -1,8 +1,8 @@
 .achievement .achievement__img {
   object-fit: cover;
   display: block;
-  height: 80px;
-  width: 80px;
+  height: 75px;
+  width: 75px;
 
   margin: 0 auto;
 }
