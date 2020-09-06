@@ -8,6 +8,8 @@
 .arrow-dots .arrow-dots__icon {
   font-size: 16px;
   font-weight: bold;
+  cursor: pointer;
+  user-select: none;
 }
 
 .arrow-dots .arrow-dots__icon.disabled {

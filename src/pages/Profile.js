@@ -45,7 +45,7 @@ function Profile({ data, onLogout, onUpdate }) {
     resetPhone();
     resetBirthdate();
 
-    imgRef.current.src = data.photo;
+    imgRef.current.src = data.photo || "/logo.jpg";
   };
 
   const onSaveCb = () => {

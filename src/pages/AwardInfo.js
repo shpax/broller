@@ -26,7 +26,7 @@ function AwardInfo({ getAward, getLevel }) {
         // src="https://www.youtube.com/embed/bb5iBYgJV4o"
         src={
           url.replace(/watch\?v=(\w+)/, "embed/$1?") +
-          "&showInfo=0&controls=0&enablejsapi=0&origin=" +
+          "&showInfo=0&enablejsapi=0&origin=" +
           encodeURIComponent(global.location.origin)
         }
         frameBorder="0"

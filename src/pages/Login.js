@@ -66,8 +66,8 @@ function Login({ onLogin }) {
 
         <div className="col-12">
           <div className="bg-white m-1 p-3 shadow-sm">
-            <p className="text-center">
-              Чтобы войти, введи свой номер телефона
+            <p className="text-center small text-muted">
+              Чтобы войти, введи свой номер телефона в формате +380XXXXXXXXX
             </p>
             <div>
               <div className="input-group mb-3">
@@ -93,13 +93,14 @@ function Login({ onLogin }) {
                 </div>
               ) : null}
               {wrongCode ? (
-                <div className="text-danger text-size-secondary mb-3">
+                <div className="text-danger text-center text-size-secondary mb-3">
                   с кодом что-то не так
                 </div>
               ) : null}
               {tooManyAuth ? (
-                <div className="text-danger text-size-secondary mb-3">
-                  много авторизаций, попробуй-ка позже
+                <div className="text-danger text-center text-size-secondary mb-3">
+                  что-то пошло не так. Проверь правильность номера или попробуй
+                  позже
                 </div>
               ) : null}
               <div ref={captchaContainer}></div>

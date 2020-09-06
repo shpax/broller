@@ -27,12 +27,12 @@ const storage = firebase.storage();
 async function createNewRoller(phone) {
   const ref = await db.collection("rollers").add({
     phone,
-    awardIds: [],
     birthdate: null,
     levelId: null,
-    name: null,
+    name: "Молодой Роллер",
     photo: null,
     playlist: null,
+    updatedAt: Date.now(),
   });
 
   return await ref.get();
@@ -120,6 +120,8 @@ export async function updateRoller(id, data) {
 
     data.photo = await ref.getDownloadURL();
   }
+
+  data.updatedAt = Date.now();
 
   await db.collection("rollers").doc(id).update(data);
 

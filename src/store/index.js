@@ -17,7 +17,7 @@ export default class Store {
   getMappedAwards() {
     return this.awards.map((award) => ({
       ...award,
-      isOpened: this.roller.awardIds.includes(award.id),
+      isOpened: !!this.videos.find((v) => v.awardId === award.id),
       rollerVideo: get(
         this.videos.find((v) => v.awardId === award.id),
         "video",
