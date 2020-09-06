@@ -56,6 +56,12 @@ async function getRoller(phone) {
     id: doc.id,
   };
 
+  if (rollerRecord.photo) {
+    const ref = storage.ref(rollerRecord.photo);
+
+    rollerRecord.photoUrl = await ref.getDownloadURL();
+  }
+
   return rollerRecord;
 }
 
@@ -112,18 +118,25 @@ export async function authWithPhone(phoneNumber) {
 }
 
 export async function updateRoller(id, data) {
+  let photoRefUrl = null;
   if (data.photo) {
-    const ref = storage.ref(
-      `profile/${id}${data.photo.name.match(/\.\w+/)[0]}`
-    );
+    const photoUrl = `profile/${id}${data.photo.name.match(/\.\w+/)[0]}`;
+    const ref = storage.ref(photoUrl);
     await ref.put(data.photo);
 
-    data.photo = await ref.getDownloadURL();
+    // data.photo = await ref.getDownloadURL();
+    data.photo = photoUrl;
+
+    photoRefUrl = await ref.getDownloadURL();
   }
 
   data.updatedAt = Date.now();
 
   await db.collection("rollers").doc(id).update(data);
+
+  if (photoRefUrl) {
+    data.photoUrl = photoRefUrl;
+  }
 
   return data;
 }

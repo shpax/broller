@@ -45,7 +45,7 @@ function Profile({ data, onLogout, onUpdate }) {
     resetPhone();
     resetBirthdate();
 
-    imgRef.current.src = data.photo || "/logo.jpg";
+    imgRef.current.src = data.photoUrl || "/logo.jpg";
   };
 
   const onSaveCb = () => {
@@ -101,7 +101,7 @@ function Profile({ data, onLogout, onUpdate }) {
             <div className="mb-3 ">
               <img
                 ref={imgRef}
-                src={data.photo || "/logo.jpg"}
+                src={data.photoUrl || "/logo.jpg"}
                 alt="фото профиля"
                 className="profile__img rounded-top"
               />
