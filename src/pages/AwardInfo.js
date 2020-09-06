@@ -39,7 +39,7 @@ function AwardInfo({ getAward, getLevel }) {
       <div className="row">
         <div className="col-12">
           <div className="shadow-sm bg-white">
-            <div className="pt-3">
+            <div>
               <img
                 className="award__img rounded-top"
                 alt="картинка ачивки"
