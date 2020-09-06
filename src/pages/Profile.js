@@ -11,7 +11,6 @@ function Profile({ data, onLogout, onUpdate }) {
   useEffect(() => {
     if (fileInputRef.current) {
       fileInputRef.current.addEventListener("change", (e) => {
-        console.log("asdasd");
         const { files } = e.target;
         if (files && files[0]) {
           var reader = new FileReader();
@@ -77,7 +76,6 @@ function Profile({ data, onLogout, onUpdate }) {
             onUpdate(updatedData);
           },
           error(err) {
-            console.log(err.message);
             onUpdate(updatedData);
           },
         });

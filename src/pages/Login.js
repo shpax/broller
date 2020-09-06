@@ -10,14 +10,10 @@ function Login({ onLogin }) {
   const codeInput = useRef(null);
   const captchaContainer = useRef(null);
 
-  console.log("rerender");
-
   useEffect(() => {
-    console.log("captcha start");
     window.recaptchaVerifier = createRecaptchaVerifier(
       captchaContainer.current
     );
-    // console.log("captcha render");
     window.recaptchaVerifier.render().then(function (widgetId) {
       window.recaptchaWidgetId = widgetId;
     });

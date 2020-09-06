@@ -44,12 +44,9 @@ async function getRoller(phone) {
     .where("phone", "==", phone)
     .get();
 
-  console.log(records);
   let doc = records.docs[0];
   if (!doc) {
     doc = await createNewRoller(phone);
-
-    console.log("created user:".doc);
   }
   const rollerRecord = {
     ...doc.data(),

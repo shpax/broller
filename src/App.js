@@ -30,7 +30,6 @@ function App() {
     if (cachedStore) {
       const phone = cachedStore.getRoller().phone;
       getData(phone).then((d) => {
-        console.log("getting effect data", d);
         cache.setValue("store", d);
 
         setStore(new Store(d));
@@ -41,7 +40,6 @@ function App() {
   const onLogin = useCallback(async (data) => {
     const userData = await getData(data.user.phoneNumber);
     cache.setValue("store", userData);
-    console.log("login user:", userData);
     setStore(new Store(userData));
   }, []);
 
@@ -52,7 +50,6 @@ function App() {
 
   const onUpdateProfile = useCallback(
     async (data) => {
-      console.log(data);
       if (roller) {
         const updatedData = await updateRoller(roller.id, data);
         const newStore = store.updateRoller(updatedData);
