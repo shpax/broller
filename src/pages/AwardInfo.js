@@ -7,14 +7,14 @@ import "./AwardInfo.css";
 function AwardInfo({ getAward, getLevel }) {
   const { id } = useParams();
 
-  const { isOpened, name, desc, awardVideo, videos, levelId } = getAward(id);
+  const { isOpened, name, desc, rollerVideo, videos, levelId } = getAward(id);
   const lvl = getLevel(levelId);
   const picture = isOpened ? lvl.awardOpenedPicture : lvl.awardClosedPicture;
 
   const videosRef = useRef({});
   const [carouselPos, setCarouselPos] = useState(0);
 
-  const items = [awardVideo, ...videos]
+  const items = [rollerVideo, ...videos]
     .filter((url) => !!url)
     .map((url, i) => (
       <iframe
@@ -25,7 +25,7 @@ function AwardInfo({ getAward, getLevel }) {
         className="award__video shadow-sm"
         // src="https://www.youtube.com/embed/bb5iBYgJV4o"
         src={
-          url.replace(/watch\?v=(\w+)/, "embed/$1?") +
+          url.replace(/watch\?v=([\w-]+)/, "embed/$1?") +
           "&showInfo=0&enablejsapi=0&origin=" +
           encodeURIComponent(global.location.origin)
         }

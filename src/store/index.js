@@ -6,8 +6,6 @@ export default class Store {
     this.levels = levels.sort((a, b) => a.difficulty - b.difficulty);
     this.roller = roller;
     this.videos = videos;
-
-    console.log(this);
   }
 
   updateRoller(data) {
