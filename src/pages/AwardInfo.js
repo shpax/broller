@@ -26,7 +26,7 @@ function AwardInfo({ getAward, getLevel }) {
         // src="https://www.youtube.com/embed/bb5iBYgJV4o"
         src={
           url.replace(/youtu\.be\/([\w-]+)/, "youtube.com/embed/$1?") +
-          "&showInfo=0&enablejsapi=0&origin=" +
+          "showInfo=0&enablejsapi=0&origin=" +
           encodeURIComponent(global.location.origin)
         }
         frameBorder="0"
@@ -53,7 +53,7 @@ function AwardInfo({ getAward, getLevel }) {
           </div>
         </div>
         {items.length ? (
-          <div className="col-12">
+          <div className="col-12 mb-1">
             <div className="">
               <div className="text-center p-3">
                 <ArrowDots
