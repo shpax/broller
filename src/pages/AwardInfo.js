@@ -47,7 +47,7 @@ function AwardInfo({ getAward, getLevel }) {
               />
             </div>
             <h2 className="text-center mb-0 pt-3">{name}</h2>
-            <div className="p=4">
+            <div className="p-4">
               <p className="award__desc mb-0">{desc}</p>
             </div>
           </div>
