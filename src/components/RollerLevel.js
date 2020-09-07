@@ -16,18 +16,19 @@ export default function RollerLevel({ current, next }) {
           />
         </div>
         <h1 className="mb-4 mt-2">{current.name}</h1>
-        {next ? (
+        {next && unopened > 0 ? (
           <>
             <p className="text-secondary mb-1 text-size-secondary">
               и {unopened} {unopenedtext} до {next.name}
             </p>
           </>
-        ) : (
+        ) : null}
+        {!next && unopened === 0 ? (
           <>
             <h6>ты достиг масимального уровня мастерства,</h6>
             <h6>я тобой горжусь!</h6>
           </>
-        )}
+        ) : null}
       </div>
     </div>
   );
