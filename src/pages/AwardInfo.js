@@ -25,7 +25,7 @@ function AwardInfo({ getAward, getLevel }) {
         className="award__video shadow-sm"
         // src="https://www.youtube.com/embed/bb5iBYgJV4o"
         src={
-          url.replace(/watch\?v=([\w-]+)/, "embed/$1?") +
+          url.replace(/youtu\.be\/([\w-]+)/, "youtube.com/embed/$1?") +
           "&showInfo=0&enablejsapi=0&origin=" +
           encodeURIComponent(global.location.origin)
         }
