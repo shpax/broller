@@ -55,7 +55,7 @@ function AwardInfo({ getAward, getLevel }) {
         {items.length ? (
           <div className="col-12">
             <div className="">
-              <div className="text-center p-2">
+              <div className="text-center p-3">
                 <ArrowDots
                   value={carouselPos}
                   onChange={setCarouselPos}
