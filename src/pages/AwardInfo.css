@@ -7,8 +7,8 @@
 }
 
 .award .award__desc {
-  font-size: small;
-  font-weight: 500;
+  /* font-size: small;
+  font-weight: 500; */
 }
 
 .award .award__desc::first-letter {

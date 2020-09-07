@@ -46,8 +46,8 @@ function AwardInfo({ getAward, getLevel }) {
                 src={picture}
               />
             </div>
-            <h2 className="text-center mb-3 pt-3">{name}</h2>
-            <div className="p-3 pt-0 ">
+            <h2 className="text-center mb-0 pt-3">{name}</h2>
+            <div className="p=4">
               <p className="award__desc mb-0">{desc}</p>
             </div>
           </div>
