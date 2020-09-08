@@ -29,7 +29,7 @@ export default function Header({ returnTo, roller }) {
         </Switch>
         {/* <a href="/"> */}
         <span className="h3 ml-3 mb-0 align-middle font-weight-bold">
-          Pro Bro
+          Pro Broller
         </span>
         {/* </a> */}
       </div>
@@ -48,7 +48,7 @@ export default function Header({ returnTo, roller }) {
                   src={photo}
                   width="40"
                   height="40"
-                  className="navbar__profile-image d-inline-block rounded-circle align-middle shadow"
+                  className="navbar__profile-image d-inline-block rounded-circle align-middle shadow-sm"
                   alt=""
                   loading="lazy"
                 />
