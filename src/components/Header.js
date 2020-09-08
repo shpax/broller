@@ -28,7 +28,9 @@ export default function Header({ returnTo, roller }) {
           </Route>
         </Switch>
         {/* <a href="/"> */}
-        <span className="h3 ml-2 mb-0 align-middle">Broller</span>
+        <span className="h3 ml-3 mb-0 align-middle font-weight-bold">
+          Pro Bro
+        </span>
         {/* </a> */}
       </div>
       <Switch>
