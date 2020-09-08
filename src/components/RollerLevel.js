@@ -15,7 +15,7 @@ export default function RollerLevel({ current, next }) {
             className="level__picture"
           />
         </div>
-        <h1 className="mb-4 mt-2">{current.name}</h1>
+        <h1 className="mb-3 mt-2">{current.name}</h1>
         {next && unopened > 0 ? (
           <>
             <p className="text-secondary mb-1 text-size-secondary">
@@ -25,8 +25,18 @@ export default function RollerLevel({ current, next }) {
         ) : null}
         {!next && unopened === 0 ? (
           <>
-            <h6>ты достиг масимального уровня мастерства,</h6>
-            <h6>я тобой горжусь!</h6>
+            <p className="pr-4 pl-4 text-left">
+              ВОУ! Похоже, ты освоил ВСЕ основные движения на роликах и достиг
+              наивысшего уровня мастерства!
+            </p>
+
+            <p className="pr-4 pl-4 text-left">
+              Возможно, теперь ты хочешь стать чемпионом по слалому или слайдам?
+              А может ты хочешь осуществить кругосветное путешествие на роликах?
+            </p>
+            <p className="pr-4 pl-4 text-left">
+              Обратись к своему тренеру, чтобы он направил тебя!
+            </p>
           </>
         ) : null}
       </div>
