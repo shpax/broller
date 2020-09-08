@@ -9,7 +9,7 @@ import ArrowDots from "../components/ArrowDots";
 
 import "./Awards.css";
 
-function Awards({ levels, currentLevel, nextLevel }) {
+function Awards({ levels, currentLevel, nextLevel, roller }) {
   const achievements = levels.map((lvl, i) => (
     <AchievementList
       list={lvl.awards}
@@ -38,7 +38,11 @@ function Awards({ levels, currentLevel, nextLevel }) {
       <div className="row">
         <div className="col-12">
           {currentLevel ? (
-            <RollerLevel current={currentLevel} next={nextLevel} />
+            <RollerLevel
+              current={currentLevel}
+              next={nextLevel}
+              roller={roller}
+            />
           ) : (
             <WelcomeSection key={-1} />
           )}

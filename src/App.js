@@ -75,6 +75,7 @@ function App() {
           <>
             <Route exact path="/awards">
               <Awards
+                roller={store.getRoller()}
                 levels={store.getMappedAwardsByLevel()}
                 currentLevel={store.getCurrentLevel()}
                 nextLevel={store.getNextLevel()}

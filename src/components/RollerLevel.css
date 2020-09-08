@@ -1,3 +1,16 @@
 .level__picture {
   width: 100%;
+  max-height: 180px;
+  object-fit: cover;
+}
+
+.roller-level__hint {
+  color: #999;
+  font-weight: 400;
+  font-size: 14px;
+  text-align: left;
+}
+
+.roller-level__hint::first-letter {
+  text-transform: uppercase;
 }
