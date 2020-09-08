@@ -7,7 +7,7 @@ export default function Achievement({ data, image }) {
     <div className="achievement mb-3">
       <Link to={`/awards/${data.id}`}>
         <img
-          className="achievement__img rounded-circle shadow-sm"
+          className="achievement__img rounded-circle shadow"
           src={image}
           alt="картинка ачивки"
         />

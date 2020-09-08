@@ -5,10 +5,10 @@
 }
 
 .roller-level__hint {
-  color: #999;
-  font-weight: 400;
-  font-size: 14px;
-  text-align: left;
+  /* color: #999; */
+  font-weight: 500;
+  /* font-size: 14px; */
+  text-align: center;
 }
 
 .roller-level__hint::first-letter {

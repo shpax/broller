@@ -15,7 +15,7 @@ export default function RollerLevel({ current, next, roller }) {
             <img
               alt="картинка уровня"
               src={current.picture}
-              className="level__picture"
+              className="level__picture rounded"
             />
           </div>
           {/* {next && unopened > 0 ? (
