@@ -4,6 +4,12 @@
   object-fit: cover;
 }
 
+@media (min-width: 480px) {
+  .level__picture {
+    max-height: none;
+  }
+}
+
 .roller-level__hint {
   /* color: #999; */
   font-weight: 500;
