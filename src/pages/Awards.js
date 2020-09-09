@@ -9,6 +9,8 @@ import ArrowDots from "../components/ArrowDots";
 
 import "./Awards.css";
 
+let startPosition = null;
+
 function Awards({ levels, currentLevel, nextLevel, roller }) {
   const achievements = levels.map((lvl, i) => (
     <AchievementList
@@ -19,19 +21,23 @@ function Awards({ levels, currentLevel, nextLevel, roller }) {
     />
   ));
 
-  let startPosition = 0;
+  if (startPosition === null) {
+    startPosition = 0;
 
-  if (currentLevel) {
-    startPosition = levels.indexOf(
-      levels.find((lvl) => lvl.id === currentLevel.id)
-    );
-  }
+    if (currentLevel) {
+      startPosition = levels.indexOf(
+        levels.find((lvl) => lvl.id === currentLevel.id)
+      );
+    }
 
-  if (startPosition > levels.length) {
-    startPosition = levels.length;
+    if (startPosition > levels.length) {
+      startPosition = levels.length;
+    }
   }
 
   const [position, setPosition] = useState(startPosition);
+
+  startPosition = position;
 
   return (
     <div className="container mt-3 awards">
@@ -57,6 +63,7 @@ function Awards({ levels, currentLevel, nextLevel, roller }) {
           <Carousel
             animationSpeed={300}
             value={position}
+            draggable={false}
             plugins={["fastSwipe"]}
             onChange={setPosition}
           >

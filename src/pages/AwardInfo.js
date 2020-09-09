@@ -65,6 +65,7 @@ function AwardInfo({ getAward, getLevel }) {
               <Carousel
                 ref={videosRef}
                 className="awards__levels shadow-sm"
+                draggable={false}
                 value={carouselPos}
                 onChange={setCarouselPos}
               >
