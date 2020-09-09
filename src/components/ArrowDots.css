@@ -6,12 +6,21 @@
 }
 
 .arrow-dots .arrow-dots__icon {
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
+  display: block;
+  width: 18px;
   cursor: pointer;
   user-select: none;
+  text-align: center;
+}
+
+.BrainhubCarousel__dots .BrainhubCarousel__dot:before {
+  width: 14px !important;
+  height: 14px !important;
+  background-color: #666 !important;
 }
 
 .arrow-dots .arrow-dots__icon.disabled {
-  color: #888;
+  color: #ccc;
 }

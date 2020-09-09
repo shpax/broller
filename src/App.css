@@ -21,12 +21,6 @@ a {
   align-items: flex-start;
 }
 
-.BrainhubCarousel__dots .BrainhubCarousel__dot:before {
-  width: 12px !important;
-  height: 12px !important;
-  background-color: #666 !important;
-}
-
 button.BrainhubCarousel__dot {
   background: none;
 }
