@@ -72,7 +72,7 @@ async function getAwardVideos(rollerId) {
 }
 
 async function getAwards() {
-  const records = await db.collection("awards").get();
+  const records = await db.collection("awards").orderBy("order").get();
   return records.docs.map((rec) => ({ ...rec.data(), id: rec.id }));
 }
 
