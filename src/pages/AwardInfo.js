@@ -14,6 +14,10 @@ function AwardInfo({ getAward, getLevel }) {
   const videosRef = useRef({});
   const [carouselPos, setCarouselPos] = useState(0);
 
+  const descHtml = desc
+    .split("\n")
+    .map((str) => <p className="award__desc mb-0">{str}</p>);
+
   const items = [rollerVideo, ...videos]
     .filter((url) => !!url)
     .map((url, i) => (
@@ -47,9 +51,7 @@ function AwardInfo({ getAward, getLevel }) {
               />
             </div>
             <h2 className="text-center mb-0 pt-3">{name}</h2>
-            <div className="p-4">
-              <p className="award__desc mb-0">{desc}</p>
-            </div>
+            <div className="p-4">{descHtml}</div>
           </div>
         </div>
         {items.length ? (
