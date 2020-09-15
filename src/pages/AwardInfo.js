@@ -55,26 +55,33 @@ function AwardInfo({ getAward, getLevel }) {
           </div>
         </div>
         {items.length ? (
-          <div className="col-12 mb-1">
-            <div className="">
-              <div className="text-center p-3">
-                <ArrowDots
+          <>
+            <div className="col-12 mb-1">
+              <div className="pt-2">
+                <div className="text-center p-2 dots-container">
+                  <div className="text-center h5 dots-container__hint mb-0 mr-4">
+                    Видео
+                  </div>
+                  {items.length > 1 ? (
+                    <ArrowDots
+                      value={carouselPos}
+                      onChange={setCarouselPos}
+                      number={items.length}
+                    />
+                  ) : null}
+                </div>
+                <Carousel
+                  ref={videosRef}
+                  className="awards__levels shadow-sm"
+                  draggable={false}
                   value={carouselPos}
                   onChange={setCarouselPos}
-                  number={items.length}
-                />
+                >
+                  {items}
+                </Carousel>
               </div>
-              <Carousel
-                ref={videosRef}
-                className="awards__levels shadow-sm"
-                draggable={false}
-                value={carouselPos}
-                onChange={setCarouselPos}
-              >
-                {items}
-              </Carousel>
             </div>
-          </div>
+          </>
         ) : null}
       </div>
     </div>

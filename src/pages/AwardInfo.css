@@ -11,6 +11,16 @@
   font-weight: 500; */
 }
 
+.dots-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dots-container__hint:last-child {
+  margin-right: 0 !important;
+}
+
 .award .award__desc::first-letter {
   text-transform: uppercase;
 }
